@@ -1,4 +1,9 @@
 return {
+  {
+    'NvChad/nvim-colorizer.lua',
+    event = 'BufReadPre',
+    opts = {},
+  },
   { 'akinsho/bufferline.nvim', version = '*', dependencies = 'nvim-tree/nvim-web-devicons' },
   {
     'nvimdev/lspsaga.nvim',
