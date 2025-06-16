@@ -632,6 +632,18 @@ require('lazy').setup({
             },
           },
         },
+        eslint = {
+          settings = {
+            experimental = {
+              useFlatConfig = true,
+            },
+            codeActionOnSave = {
+              enable = true,
+              mode = 'all', -- or "fixAll"
+            },
+            format = true,
+          },
+        },
       }
 
       -- Ensure the servers and tools above are installed
@@ -647,6 +659,9 @@ require('lazy').setup({
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
+        'eslint',
+        'markdownlint',
+        'prettier',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -692,20 +707,20 @@ require('lazy').setup({
           lsp_format_opt = 'fallback'
         end
         return {
-          timeout_ms = 500,
+          timeout_ms = 5000,
           lsp_format = lsp_format_opt,
         }
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
+        json = { 'prettier' }, -- 👈 Add this line
+        jsonc = { 'prettier' },
+        javascript = { 'prettier' },
+        typescript = { 'prettier' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
-        typescript = { 'prettier', 'eslint_d' },
-        typescriptreact = { 'prettier', 'eslint_d' },
-        javascript = { 'prettier', 'eslint_d' },
-        javascriptreact = { 'prettier', 'eslint_d' },
       },
     },
   },

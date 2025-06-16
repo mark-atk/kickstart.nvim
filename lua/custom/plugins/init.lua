@@ -19,8 +19,8 @@ return {
     config = function()
       require('lspsaga').setup {
         lightbulb = {
-          enable = false
-        }
+          enable = false,
+        },
       }
     end,
     dependencies = {
